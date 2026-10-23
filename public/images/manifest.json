@@ -1,0 +1,418 @@
+[
+ {
+  "file": "images/hero/hero-substation-crew.jpg",
+  "alt": "Crew working on a high-voltage substation",
+  "note": "Cover photo",
+  "source_page": 1,
+  "w": 1168,
+  "h": 685
+ },
+ {
+  "file": "images/brand/ganesha.jpg",
+  "alt": "Lord Ganesha illustration from the profile cover",
+  "note": "Cover",
+  "source_page": 1,
+  "w": 262,
+  "h": 368
+ },
+ {
+  "file": "images/gallery/distribution-substation-kiosk.jpg",
+  "alt": "Distribution substation with pole-mounted structure",
+  "note": "Completed work",
+  "source_page": 4,
+  "w": 492,
+  "h": 380
+ },
+ {
+  "file": "images/gallery/power-transformer-yard.jpg",
+  "alt": "Power transformer in substation yard",
+  "note": "Completed work",
+  "source_page": 4,
+  "w": 521,
+  "h": 377
+ },
+ {
+  "file": "images/gallery/control-panel-room.jpg",
+  "alt": "Control and relay panel room",
+  "note": "Completed work \u00b7 has EEP watermark",
+  "source_page": 4,
+  "w": 521,
+  "h": 375
+ },
+ {
+  "file": "images/gallery/33kv-switchyard-structure.jpg",
+  "alt": "33 kV switchyard structure",
+  "note": "Completed work",
+  "source_page": 4,
+  "w": 493,
+  "h": 375
+ },
+ {
+  "file": "images/gallery/transformer-apartment-complex.jpg",
+  "alt": "Transformer installation for an apartment complex",
+  "note": "Completed work",
+  "source_page": 4,
+  "w": 493,
+  "h": 388
+ },
+ {
+  "file": "images/gallery/outdoor-substation.jpg",
+  "alt": "Outdoor 33/11 kV substation",
+  "note": "Completed work",
+  "source_page": 4,
+  "w": 520,
+  "h": 387
+ },
+ {
+  "file": "images/gallery/power-transformer-red-structure.jpg",
+  "alt": "Power transformer with gantry structure",
+  "note": "Completed work",
+  "source_page": 5,
+  "w": 518,
+  "h": 339
+ },
+ {
+  "file": "images/gallery/street-lighting-road.jpg",
+  "alt": "Street lighting along a highway",
+  "note": "Completed work",
+  "source_page": 5,
+  "w": 515,
+  "h": 332
+ },
+ {
+  "file": "images/gallery/ug-cable-laying-trench.jpg",
+  "alt": "Underground XLPE cable laying in trench",
+  "note": "Completed work",
+  "source_page": 5,
+  "w": 515,
+  "h": 587
+ },
+ {
+  "file": "images/gallery/transmission-tower.jpg",
+  "alt": "Transmission line tower",
+  "note": "Completed work",
+  "source_page": 5,
+  "w": 516,
+  "h": 588
+ },
+ {
+  "file": "images/gallery/solar-panel-structure.jpg",
+  "alt": "Ground-mounted solar panel structure",
+  "note": "Completed work \u00b7 solar",
+  "source_page": 5,
+  "w": 516,
+  "h": 370
+ },
+ {
+  "file": "images/gallery/rooftop-solar-plant.jpg",
+  "alt": "Large rooftop on-grid solar plant",
+  "note": "Completed work \u00b7 solar",
+  "source_page": 5,
+  "w": 536,
+  "h": 370
+ },
+ {
+  "file": "images/projects/lt-panel-room-cable-trays-1.jpg",
+  "alt": "LT panel room with overhead cable trays",
+  "note": "Panel room",
+  "source_page": 11,
+  "w": 1210,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/lt-panel-room-400sqmm-feeders.jpg",
+  "alt": "Panel room with 400 sq.mm feeder labels",
+  "note": "Panel room",
+  "source_page": 12,
+  "w": 1210,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/lt-panel-room-fire-safety.jpg",
+  "alt": "Panel room with fire extinguisher",
+  "note": "Panel room",
+  "source_page": 13,
+  "w": 1210,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/lt-panel-room-cable-trays-2.jpg",
+  "alt": "Cable tray run above panel line-up",
+  "note": "Panel room",
+  "source_page": 14,
+  "w": 1210,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/pcc-panel-1.jpg",
+  "alt": "PCC panel",
+  "note": "PCC panel (rotated fixed)",
+  "source_page": 15,
+  "w": 1470,
+  "h": 1263
+ },
+ {
+  "file": "images/projects/250kva-substation-charged.jpg",
+  "alt": "250 kVA substation charged and 25 kVA temporary connection dismantled",
+  "note": "Has caption overlay",
+  "source_page": 16,
+  "w": 1401,
+  "h": 1263
+ },
+ {
+  "file": "images/projects/oltc-repair-1.jpg",
+  "alt": "Transformer OLTC repair at site",
+  "note": "OLTC",
+  "source_page": 17,
+  "w": 1573,
+  "h": 1015
+ },
+ {
+  "file": "images/projects/ct-oil-leakage-arresting-1.jpg",
+  "alt": "CT oil leakage arresting at site",
+  "note": "CT",
+  "source_page": 18,
+  "w": 1125,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/cable-joint-kits-1.jpg",
+  "alt": "Cable joint kits and end kits termination works",
+  "note": "Has caption overlay",
+  "source_page": 19,
+  "w": 1178,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/transformer-conservator-tank.jpg",
+  "alt": "Transformer conservator tank and oil level gauges",
+  "note": "Transformer",
+  "source_page": 20,
+  "w": 1219,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/33kv-ct-oil-leakage-arresting.jpg",
+  "alt": "33 kV CT oil leakage arresting at site",
+  "note": "Has caption overlay",
+  "source_page": 21,
+  "w": 1263,
+  "h": 1595
+ },
+ {
+  "file": "images/projects/ev-station-ht-panel.jpg",
+  "alt": "EV station HT service panel charged successfully",
+  "note": "EV \u00b7 has caption overlay",
+  "source_page": 22,
+  "w": 1095,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/630kva-11kv-substation-1.jpg",
+  "alt": "630 kVA, 11 kV substation charged successfully",
+  "note": "Has caption overlay",
+  "source_page": 23,
+  "w": 1263,
+  "h": 1432
+ },
+ {
+  "file": "images/projects/transformer-crane-lift.jpg",
+  "alt": "Transformer being lifted by crane at commercial site",
+  "note": "Erection",
+  "source_page": 24,
+  "w": 1057,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/ev-station-ht-pole.jpg",
+  "alt": "EV station HT service pole structure",
+  "note": "EV \u00b7 has caption overlay",
+  "source_page": 25,
+  "w": 1043,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/63kva-dtr-commercial.jpg",
+  "alt": "63 kVA DTR charged for commercial building",
+  "note": "Has caption overlay",
+  "source_page": 26,
+  "w": 1030,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/cable-joint-kits-2.jpg",
+  "alt": "Cable joint kits and end kits termination works",
+  "note": "Has caption overlay",
+  "source_page": 27,
+  "w": 1206,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/ev-station-ht-kiosk.jpg",
+  "alt": "EV station HT service kiosk on plinths",
+  "note": "EV \u00b7 has caption overlay",
+  "source_page": 28,
+  "w": 1040,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/33kv-ct-oil-leakage-team.jpg",
+  "alt": "Team arresting 33 kV CT oil leakage",
+  "note": "Has caption overlay",
+  "source_page": 29,
+  "w": 1256,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/ct-oil-leakage-arresting-2.jpg",
+  "alt": "CT oil leakage arresting at site",
+  "note": "Near-duplicate of ct-oil-leakage-arresting-1",
+  "source_page": 30,
+  "w": 1140,
+  "h": 1473
+ },
+ {
+  "file": "images/projects/pcc-panel-2.jpg",
+  "alt": "PCC panel",
+  "note": "Near-duplicate of pcc-panel-1",
+  "source_page": 31,
+  "w": 1306,
+  "h": 1003
+ },
+ {
+  "file": "images/projects/compact-substation-fenced.jpg",
+  "alt": "Fenced compact substation at an industrial site",
+  "note": "Cropped from phone screenshot",
+  "source_page": 32,
+  "w": 744,
+  "h": 430
+ },
+ {
+  "file": "images/projects/33kv-structure-erection.jpg",
+  "alt": "33 kV structure erection",
+  "note": "Has grey side bars",
+  "source_page": 33,
+  "w": 1290,
+  "h": 1263
+ },
+ {
+  "file": "images/projects/oltc-repair-2.jpg",
+  "alt": "Transformer OLTC repair at site",
+  "note": "Near-duplicate of oltc-repair-1",
+  "source_page": 34,
+  "w": 1461,
+  "h": 1046
+ },
+ {
+  "file": "images/projects/630kva-11kv-kiosk.jpg",
+  "alt": "630 kVA, 11 kV substation kiosk",
+  "note": "Has caption overlay",
+  "source_page": 35,
+  "w": 1239,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/oltc-repair-3.jpg",
+  "alt": "Transformer OLTC repair at site",
+  "note": "Near-duplicate of oltc-repair-1",
+  "source_page": 36,
+  "w": 1345,
+  "h": 1263
+ },
+ {
+  "file": "images/projects/2500kva-33kv-oltc-replacement.jpg",
+  "alt": "2500 kVA, 33 kV transformer OLTC critical parts replacement",
+  "note": "Has caption overlay",
+  "source_page": 37,
+  "w": 1254,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/630kva-11kv-substation-2.jpg",
+  "alt": "630 kVA, 11 kV substation charged successfully",
+  "note": "Has caption overlay",
+  "source_page": 38,
+  "w": 1263,
+  "h": 1563
+ },
+ {
+  "file": "images/projects/630kva-11kv-substation-3.jpg",
+  "alt": "630 kVA, 11 kV substation charged successfully",
+  "note": "Has caption overlay",
+  "source_page": 39,
+  "w": 1588,
+  "h": 1263
+ },
+ {
+  "file": "images/projects/panel-room-lineup.jpg",
+  "alt": "Large panel line-up in electrical room",
+  "note": "Has dark side bars",
+  "source_page": 40,
+  "w": 1109,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/ev-chargers-ather.jpg",
+  "alt": "EV fast chargers installed",
+  "note": "EV \u00b7 has caption overlay",
+  "source_page": 41,
+  "w": 1055,
+  "h": 1600
+ },
+ {
+  "file": "images/projects/compact-substation-industrial.jpg",
+  "alt": "Compact substation at industrial shed",
+  "note": "Has grey side bars",
+  "source_page": 42,
+  "w": 1600,
+  "h": 1145
+ },
+ {
+  "file": "images/projects/250kva-substation-2.jpg",
+  "alt": "250 kVA substation charged, temporary connection dismantled",
+  "note": "Has caption overlay",
+  "source_page": 43,
+  "w": 1315,
+  "h": 1263
+ },
+ {
+  "file": "images/documents/work-order-tsspdcl-1.jpg",
+  "alt": "TSSPDCL work order \u2013 erection of 33/11 kV substation",
+  "note": "Document \u2013 show as thumbnail with lightbox",
+  "source_page": 6,
+  "w": 1082,
+  "h": 1400
+ },
+ {
+  "file": "images/documents/work-order-tsspdcl-2.jpg",
+  "alt": "TSSPDCL work order \u2013 33/11 kV substation, Reddy Khanapur",
+  "note": "Document \u2013 show as thumbnail with lightbox",
+  "source_page": 7,
+  "w": 1082,
+  "h": 1400
+ },
+ {
+  "file": "images/documents/work-order-tsspdcl-3.jpg",
+  "alt": "TSSPDCL work order \u2013 33/11 kV substation, Siddipet",
+  "note": "Document \u2013 show as thumbnail with lightbox",
+  "source_page": 8,
+  "w": 1082,
+  "h": 1400
+ },
+ {
+  "file": "images/documents/work-order-tsspdcl-4.jpg",
+  "alt": "TSSPDCL work order \u2013 additional 5 MVA power transformer",
+  "note": "Document \u2013 show as thumbnail with lightbox",
+  "source_page": 9,
+  "w": 1082,
+  "h": 1400
+ },
+ {
+  "file": "images/documents/electrical-contractor-licence-grade-a.jpg",
+  "alt": "Telangana Electrical Licensing Board \u2013 Grade A contractor licence",
+  "note": "Document \u2013 show as thumbnail with lightbox",
+  "source_page": 10,
+  "w": 1010,
+  "h": 1400
+ }
+]
