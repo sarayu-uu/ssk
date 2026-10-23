@@ -20,7 +20,7 @@ export default function Picture({ image, className, loading = 'lazy', fetchPrior
         width={image.width}
         height={image.height}
         loading={loading}
-        fetchPriority={fetchPriority}
+        {...{ fetchpriority: fetchPriority }}
         className={className}
       />
     </picture>
