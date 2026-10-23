@@ -46,6 +46,34 @@ const whyUs = [
   },
 ]
 
+// Stages use facts from CLAUDE.md only — no invented years beyond the founding date
+const story = [
+  {
+    tag: String(company.established),
+    title: 'Founded in Hyderabad',
+    text: `${company.proprietor.name} starts the firm with a small crew and distribution works.`,
+    image: 'distribution-substation-kiosk',
+  },
+  {
+    tag: 'Growth',
+    title: 'Into HT & substations',
+    text: '11 kV and 33 kV substations, complete switchyards and transformer works.',
+    image: 'outdoor-substation',
+  },
+  {
+    tag: 'Scale',
+    title: '10,000+ km of lines',
+    text: 'Transmission lines across two states, plus 2,000+ km of XLPE underground cable.',
+    image: 'transmission-tower',
+  },
+  {
+    tag: 'Today',
+    title: 'Class‑I, full scope',
+    text: 'Licensed above 33 kV by TGSPDCL & APEPDCL. Now delivering solar plants and EV charging HT services.',
+    image: 'rooftop-solar-plant',
+  },
+]
+
 /** Photo with an offset amber frame behind it (md+). */
 function FramedPhoto({ image, className = '', children }: { image?: SiteImage; className?: string; children?: ReactNode }) {
   if (!image) return null
@@ -64,7 +92,6 @@ export default function About() {
     `${company.name}: A Grade Class-1 electrical contractor in Hyderabad since ${company.established}. Substations, HT/LT works and XLPE cabling.`,
   )
 
-  const storyPhoto = getImage('outdoor-substation')
   const cablePhoto = getImage('ug-cable-laying-trench')
   const sitePhoto = getImage('transformer-apartment-complex')
 
@@ -78,34 +105,42 @@ export default function About() {
       <StatBand stats={stats} />
 
       <Section eyebrow="Our story" title="From a small crew to a Class‑I contractor">
-        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-          <div className="space-y-4 text-ink">
-            <p>
-              Sri Sai Krupa Constructions &amp; Electrical Works was established in {company.established} by{' '}
-              {company.proprietor.name}. We started with distribution works and grew into a full-scope
-              contractor for HT and LT electrical infrastructure.
-            </p>
-            <p>
-              Today we hold {company.grade} status with TGSPDCL and APEPDCL, and we work on voltages above 33 kV
-              in both Telangana and Andhra Pradesh.
-            </p>
-            <p>
-              We have laid over 10,000 km of transmission lines and 2,000+ km of XLPE underground cable. We
-              build substations, install and service transformers, and deliver on-grid solar and EV charging
-              connections.
-            </p>
-            <p className="flex items-start gap-2 text-sm text-slate">
-              <MapPin aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-amber" />
-              {company.address.full}
-            </p>
-          </div>
-          <FramedPhoto image={storyPhoto}>
-            <div className="on-navy absolute bottom-3 left-3 rounded-lg bg-navy px-3 py-2 text-white shadow-md md:-bottom-5 md:-left-5 md:px-5 md:py-3">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-amber md:text-xs">Established</p>
-              <p className="font-heading text-xl font-extrabold leading-none md:text-3xl">{company.established}</p>
-            </div>
-          </FramedPhoto>
+        <div className="max-w-3xl">
+          <p className="font-heading text-lg font-bold leading-snug text-navy md:text-2xl">
+            Founded by {company.proprietor.name} in {company.established}. Every stage since has added voltage,
+            scale and scope.
+          </p>
+          <p className="mt-4 inline-flex items-start gap-2 rounded-full bg-surface px-3 py-1.5 text-xs text-slate">
+            <MapPin aria-hidden className="h-4 w-4 shrink-0 text-amber" />
+            Kukatpally, Hyderabad · serving Telangana &amp; Andhra Pradesh
+          </p>
         </div>
+
+        {/* Timeline: vertical on mobile, horizontal track on md+ */}
+        <ol className="ml-2 mt-10 border-l-2 border-steel/40 md:ml-0 md:grid md:grid-cols-4 md:gap-6 md:border-l-0 md:border-t-2">
+          {story.map((st, i) => {
+            const last = i === story.length - 1
+            const photo = getImage(st.image)
+            return (
+              <li key={st.title} className="relative pb-8 pl-6 last:pb-0 md:pb-0 md:pl-0 md:pt-8">
+                <span
+                  aria-hidden
+                  className={`absolute -left-[9px] top-0.5 h-4 w-4 rounded-full border-2 border-white md:-top-[9px] md:left-0 ${
+                    last ? 'bg-amber ring-4 ring-amber/30' : 'bg-navy ring-2 ring-steel/50'
+                  }`}
+                />
+                <p className={`font-mono text-xs font-bold uppercase tracking-wider ${last ? 'text-amber' : 'text-slate'}`}>
+                  {st.tag}
+                </p>
+                <h3 className="mt-1 text-base md:text-lg">{st.title}</h3>
+                <p className="mt-1 text-sm text-slate">{st.text}</p>
+                {photo && (
+                  <Picture image={photo} className="mt-3 aspect-[16/9] w-full rounded-card object-cover shadow-sm" />
+                )}
+              </li>
+            )
+          })}
+        </ol>
       </Section>
 
       <Section tone="surface" eyebrow="Proprietor" title="Owner-led, on every site">

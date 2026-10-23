@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, Phone } from 'lucide-react'
+import { Menu, Phone, Home, Building2, Wrench, Images, ShieldCheck, Mail } from 'lucide-react'
 import { company } from '../data/company'
 import MobileNav, { type NavItem } from './MobileNav'
 
 const links: NavItem[] = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
-  { to: '/services', label: 'Services' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/credentials', label: 'Credentials' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/', label: 'Home', icon: Home },
+  { to: '/about', label: 'About', icon: Building2 },
+  { to: '/services', label: 'Services', icon: Wrench },
+  { to: '/projects', label: 'Projects', icon: Images },
+  { to: '/credentials', label: 'Credentials', icon: ShieldCheck },
+  { to: '/contact', label: 'Contact', icon: Mail },
 ]
 
 const MENU_ID = 'mobile-menu'
@@ -30,7 +30,7 @@ export default function Header() {
         <Link to="/" aria-label={company.name} className="flex min-h-11 min-w-0 items-center gap-2">
           <span className="flex flex-col leading-tight">
             <span className="whitespace-nowrap font-heading text-base font-extrabold sm:text-lg">SSK Electricals</span>
-            <span className="hidden whitespace-nowrap text-[11px] font-medium text-amber sm:block">
+            <span className="whitespace-nowrap text-[10px] font-medium text-amber sm:text-[11px]">
               A Grade Class‑1 Contractor
             </span>
           </span>
@@ -63,6 +63,15 @@ export default function Header() {
           >
             <Phone className="h-4 w-4" aria-hidden="true" />
             {company.phones[0].display}
+          </a>
+          {/* Always-visible Call on mobile */}
+          <a
+            href={`tel:${company.phones[0].tel}`}
+            aria-label={`Call ${company.phones[0].display}`}
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-btn bg-amber px-3 text-xs font-bold text-navy hover:brightness-95 lg:hidden"
+          >
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call
           </a>
           <button
             type="button"
