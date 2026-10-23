@@ -67,7 +67,7 @@ export const licences: Licence[] = [
 export const services: Service[] = [
   {
     slug: 'substations',
-    title: 'Substation construction',
+    title: 'Substation erection',
     summary: 'Complete substations and switchyards from 11 kV to 33 kV and above.',
     points: ['11 kV and 33 kV substations', '33/11 kV substations', 'Complete switchyards'],
   },

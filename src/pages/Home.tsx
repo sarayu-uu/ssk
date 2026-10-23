@@ -84,7 +84,7 @@ function Licences() {
 }
 
 const previewServices: { slug: string; image: string }[] = [
-  { slug: 'substations', image: 'distribution-substation-kiosk' },
+  { slug: 'substations', image: 'compact-substation-fenced' },
   { slug: 'ht-lt-works', image: '33kv-switchyard-structure' },
   { slug: 'cabling', image: 'ug-cable-laying-trench' },
   { slug: 'transmission-lines', image: 'transmission-tower' },
