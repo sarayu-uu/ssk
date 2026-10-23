@@ -5,6 +5,7 @@ import Picture from '../components/Picture'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { services } from '../data/company'
 import { getImage } from '../data/images'
+import Reveal from '../components/Reveal'
 
 const serviceImages: Record<string, string> = {
   substations: 'outdoor-substation',
@@ -102,7 +103,7 @@ export default function Services() {
           >
             <div className="mx-auto grid max-w-6xl items-center gap-6 px-4 md:grid-cols-2 md:gap-12">
               {image && (
-                <div className={`relative overflow-hidden rounded-card shadow-sm ${i % 2 ? 'md:order-2' : ''}`}>
+                <Reveal className={`relative overflow-hidden rounded-card shadow-sm ${i % 2 ? 'md:order-2' : ''}`}>
                   <Picture image={image} className="aspect-[16/10] w-full object-cover md:aspect-[4/3]" />
                   <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
                   <span
@@ -111,9 +112,9 @@ export default function Services() {
                   >
                     {num(i)}
                   </span>
-                </div>
+                </Reveal>
               )}
-              <div>
+              <Reveal stagger delay={100}>
                 <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate">
                   Service {num(i)} / {num(services.length - 1)}
                 </p>
@@ -131,7 +132,7 @@ export default function Services() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </Reveal>
             </div>
           </section>
         )

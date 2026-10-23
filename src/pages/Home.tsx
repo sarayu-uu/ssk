@@ -27,7 +27,7 @@ function Hero() {
       )}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-navy/90 via-navy/80 to-navy/95 md:bg-gradient-to-r md:from-navy/95 md:via-navy/80 md:to-navy/40" />
 
-      <div className="mx-auto flex min-h-[32rem] max-w-6xl flex-col justify-center px-4 py-14 md:min-h-[36rem] md:py-20 lg:min-h-[40rem]">
+      <div className="rise-stagger mx-auto flex min-h-[32rem] max-w-6xl flex-col justify-center px-4 py-14 md:min-h-[36rem] md:py-20 lg:min-h-[40rem]">
         <p className="mb-4 inline-flex w-fit items-center rounded-full border border-amber/60 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber sm:text-sm">
           {company.grade}
         </p>

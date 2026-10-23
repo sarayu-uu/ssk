@@ -1,11 +1,12 @@
 import { MessageCircle, Phone } from 'lucide-react'
 import { company } from '../data/company'
 import Button from './Button'
+import Reveal from './Reveal'
 
 export default function CTABand() {
   return (
     <section data-hide-fab className="on-navy bg-navy py-14 text-white md:py-20">
-      <div className="mx-auto max-w-6xl px-4 text-center">
+      <Reveal stagger className="mx-auto max-w-6xl px-4 text-center">
         <h2 className="font-heading text-2xl font-extrabold !text-white md:text-4xl">
           Planning a substation or HT connection? Talk to us
         </h2>
@@ -22,7 +23,7 @@ export default function CTABand() {
             WhatsApp
           </Button>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

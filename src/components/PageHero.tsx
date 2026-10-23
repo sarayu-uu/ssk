@@ -8,7 +8,7 @@ interface PageHeroProps {
 export default function PageHero({ eyebrow, title, intro }: PageHeroProps) {
   return (
     <section className="on-navy bg-navy py-14 text-white md:py-20">
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="rise-stagger mx-auto max-w-6xl px-4">
         <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-amber">{eyebrow}</p>
         <h1 className="max-w-3xl text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
           {title}

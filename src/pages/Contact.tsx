@@ -5,6 +5,7 @@ import PageHero from '../components/PageHero'
 import Button from '../components/Button'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { company, services } from '../data/company'
+import Reveal from '../components/Reveal'
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 type Errors = Partial<Record<'name' | 'phone' | 'message', string>>
@@ -82,7 +83,7 @@ export default function Contact() {
         {/* Mobile order: call/WhatsApp → form → address & map. lg: form spans the right column */}
         <div className="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-x-14 lg:gap-y-6">
           {/* Direct contact */}
-          <div>
+          <Reveal stagger>
             <h2 className="text-2xl md:text-4xl">Call or message</h2>
             <p className="mt-2 text-slate">Tap to reach us directly. We usually reply the same day.</p>
             <ul className="mt-5 space-y-2">
@@ -140,10 +141,10 @@ export default function Contact() {
                 </a>
               </li>
             </ul>
-          </div>
+          </Reveal>
 
           {/* Form */}
-          <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          <Reveal stagger delay={100} className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
             <h2 className="text-2xl md:text-4xl">Send an enquiry</h2>
 
             {status === 'success' ? (
@@ -226,10 +227,10 @@ export default function Contact() {
                 </Button>
               </form>
             )}
-          </div>
+          </Reveal>
 
           {/* Address & map */}
-          <div className="lg:col-start-1">
+          <Reveal className="lg:col-start-1">
             <address className="flex gap-2.5 rounded-card bg-surface p-3 not-italic text-ink">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-navy text-white">
                 <MapPin className="h-4 w-4" aria-hidden="true" />
@@ -250,7 +251,7 @@ export default function Contact() {
                 className="block aspect-[4/3] w-full border-0"
               />
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

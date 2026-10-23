@@ -7,6 +7,7 @@ import { company, licences } from '../data/company'
 import { documentImages } from '../data/images'
 import Lightbox from '../components/Lightbox'
 import LicenceRegister, { type RegisterItem } from '../components/LicenceRegister'
+import Reveal from '../components/Reveal'
 
 // 'TGSPDCL, Telangana' -> name 'TGSPDCL', sub 'Telangana · All voltages exceeding 33 kV'
 const registerItems: RegisterItem[] = licences.map((l) => {
@@ -31,7 +32,7 @@ export default function Credentials() {
       />
 
       <section aria-labelledby="licences-heading" className="bg-white py-14 md:py-20">
-        <div className="mx-auto max-w-6xl px-4">
+        <Reveal stagger className="mx-auto max-w-6xl px-4">
           <h2 id="licences-heading" className="text-2xl md:text-4xl">Licences</h2>
           <p className="mt-2 text-sm text-slate">
             Two states · Vendor No. <span className="tabular-nums text-ink">{company.vendorNo}</span>
@@ -47,12 +48,12 @@ export default function Credentials() {
               action={<span className="text-[11px] font-semibold text-steel md:text-xs">{licences.length} licences</span>}
             />
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {documentImages.length > 0 && (
       <section className="bg-surface py-14 md:py-20">
-        <div className="mx-auto max-w-6xl px-4">
+        <Reveal stagger className="mx-auto max-w-6xl px-4">
           <h2 className="text-2xl md:text-4xl">Licence &amp; work order documents</h2>
           <p className="mt-2 max-w-2xl text-slate">Tap a document to view it full screen. Pinch or double-tap to zoom.</p>
 
@@ -73,7 +74,7 @@ export default function Credentials() {
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
       </section>
       )}
 
