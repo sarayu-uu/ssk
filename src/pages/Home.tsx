@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
-import { Phone, MessageCircle, ShieldCheck, ArrowRight } from 'lucide-react'
+import { Phone, MessageCircle, ShieldCheck, ArrowRight, Landmark } from 'lucide-react'
 import Button from '../components/Button'
 import Section from '../components/Section'
 import ServiceCard from '../components/ServiceCard'
-import ImageGrid from '../components/ImageGrid'
 import { company, services, privateClients, governmentWork } from '../data/company'
 import { getImage, type SiteImage } from '../data/images'
 import Picture from '../components/Picture'
@@ -152,12 +151,24 @@ function ServicesPreview() {
       title="Electrical works, end to end"
       intro="From 11 kV substations to XLPE cabling and solar plants."
     >
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
+      {/* Swipe carousel below lg (next card peeks in), 3-col grid on desktop */}
+      <ul
+        tabIndex={0}
+        aria-label="Services — swipe for more"
+        className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden"
+      >
         {previewServices.map(({ slug, image }) => {
           const service = services.find((s) => s.slug === slug)
-          return service ? <ServiceCard key={slug} service={service} image={getImage(image)} /> : null
+          return service ? (
+            <li key={slug} className="w-[78%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
+              <ServiceCard service={service} image={getImage(image)} />
+            </li>
+          ) : null
         })}
-      </div>
+      </ul>
+      <p aria-hidden className="mt-2 text-center text-[11px] text-slate lg:hidden">
+        Swipe to see more →
+      </p>
       <div className="mt-8 text-center">
         <Button variant="secondary" href="/services">
           View all services
@@ -180,7 +191,39 @@ const featuredImages = featuredIds.map(getImage).filter((i): i is SiteImage => !
 function FeaturedProjects() {
   return (
     <Section eyebrow="Our work" title="Featured projects" intro="Substations, transformers, panels, solar and EV sites we have delivered.">
-      <ImageGrid images={featuredImages} showCaptions />
+      {/* Mosaic: mobile = wide lead + 2-col + wide closer; md+ = 2×2 lead with tiles around it */}
+      <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 md:auto-rows-[200px] md:gap-4 lg:auto-rows-[240px]">
+        {featuredImages.map((img, i) => {
+          const lead = i === 0
+          const closer = i === featuredImages.length - 1
+          const shape = lead
+            ? 'col-span-2 aspect-[16/10] md:row-span-2 md:aspect-auto'
+            : closer
+              ? 'col-span-2 aspect-[16/9] md:col-span-1 md:aspect-auto'
+              : 'aspect-square md:aspect-auto'
+          return (
+            <li key={img.id} className={`relative overflow-hidden rounded-card bg-navy shadow-sm ${shape}`}>
+              <Link to="/projects" className="group block h-full w-full" aria-label={`${img.alt} — see all projects`}>
+                <Picture
+                  image={img}
+                  className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${img.hasCaption ? 'object-top' : 'object-center'}`}
+                />
+                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-3 md:p-4">
+                  {img.category && (
+                    <span className="mb-1.5 inline-block rounded-full bg-amber px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-navy md:text-[11px]">
+                      {img.category}
+                    </span>
+                  )}
+                  <p className={`line-clamp-2 font-medium leading-snug text-white ${lead ? 'text-sm md:text-lg' : 'text-[11px] md:text-sm'}`}>
+                    {img.alt}
+                  </p>
+                </div>
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
       <div className="mt-8 text-center">
         <Button variant="secondary" href="/projects">
           See all projects
@@ -190,19 +233,55 @@ function FeaturedProjects() {
   )
 }
 
+const workOrderAreas = ['Medak circle', 'Siddipet', 'Sangareddy']
+
+const initials = (name: string) =>
+  name
+    .split(' ')
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join('')
+
 function Clients() {
   return (
     <Section
       tone="surface"
       eyebrow="Clients"
       title="Trusted by industry and utilities"
-      intro={`${governmentWork.summary} ${governmentWork.workOrders}`}
+      intro="HT connections for industry, and new substations for the state utility."
     >
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Utility work first — government orders are the strongest reference */}
+      <div className="on-navy rounded-card bg-navy p-5 text-white shadow-sm md:flex md:items-center md:justify-between md:gap-8 md:p-8">
+        <div className="flex items-start gap-3">
+          <Landmark aria-hidden className="mt-0.5 h-6 w-6 shrink-0 text-amber md:h-8 md:w-8" />
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-wider text-amber md:text-xs">Government · TSSPDCL</p>
+            <p className="mt-1 font-heading text-base font-bold leading-snug md:text-xl">{governmentWork.summary}</p>
+          </div>
+        </div>
+        <ul aria-label="Work order circles" className="mt-4 flex flex-wrap gap-2 md:mt-0 md:shrink-0">
+          {workOrderAreas.map((a) => (
+            <li key={a} className="rounded-full border border-white/25 px-3 py-1 text-xs text-white/90">
+              {a}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <p className="mb-3 mt-8 text-[11px] font-bold uppercase tracking-wider text-slate md:text-xs">Private sector</p>
+      <ul className="grid gap-px overflow-hidden rounded-card border border-steel/40 bg-steel/30 sm:grid-cols-2 lg:grid-cols-4">
         {privateClients.map((c) => (
-          <li key={c.name} className="rounded-card border border-steel/40 bg-white p-4 shadow-sm">
-            <p className="font-heading font-bold text-navy">{c.name}</p>
-            <p className="mt-1 text-sm text-slate">{c.detail}</p>
+          <li key={c.name} className="flex items-center gap-3 bg-white p-3 md:p-4">
+            <span
+              aria-hidden
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface font-heading text-sm font-extrabold text-navy ring-1 ring-steel/50"
+            >
+              {initials(c.name)}
+            </span>
+            <div className="min-w-0">
+              <p className="font-heading text-sm font-bold leading-snug text-navy">{c.name}</p>
+              <p className="mt-0.5 font-mono text-[11px] text-slate">{c.detail}</p>
+            </div>
           </li>
         ))}
       </ul>
