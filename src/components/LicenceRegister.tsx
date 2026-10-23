@@ -52,7 +52,7 @@ export default function LicenceRegister({
               {l.sub && <p className="text-[11px] text-slate md:text-xs">{l.sub}</p>}
             </div>
             <div className="shrink-0 text-right md:mt-3 md:text-left">
-              <p className="font-mono text-sm font-semibold tracking-tight text-ink">
+              <p className="text-sm font-semibold tabular-nums text-ink">
                 <span className="sr-only">Licence no. </span>
                 {l.number}
               </p>

@@ -15,7 +15,7 @@ const footerLicences = [licences[0], licences[1], licences[5]]
 
 export default function Footer() {
   return (
-    <footer className="bg-navy pb-20 text-steel md:pb-0">
+    <footer data-hide-fab className="bg-navy text-steel">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <p className="font-heading text-lg font-extrabold text-white">{company.shortName}</p>

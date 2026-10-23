@@ -129,7 +129,7 @@ export default function About() {
                     last ? 'bg-amber ring-4 ring-amber/30' : 'bg-navy ring-2 ring-steel/50'
                   }`}
                 />
-                <p className={`font-mono text-xs font-bold uppercase tracking-wider ${last ? 'text-amber' : 'text-slate'}`}>
+                <p className={`text-xs font-bold uppercase tabular-nums tracking-wider ${last ? 'text-navy' : 'text-slate'}`}>
                   {st.tag}
                 </p>
                 <h3 className="mt-1 text-base md:text-lg">{st.title}</h3>
@@ -173,7 +173,7 @@ export default function About() {
           {values.map(({ icon: Icon, title, text }, i) => (
             <li key={title} className="border-t-2 border-amber pt-4">
               <div className="flex items-center justify-between">
-                <span className="font-heading text-3xl font-extrabold text-steel/70 md:text-4xl">
+                <span aria-hidden className="font-heading text-3xl font-extrabold text-steel/70 md:text-4xl">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <Icon aria-hidden className="h-6 w-6 text-navy" />
@@ -190,7 +190,7 @@ export default function About() {
           <ul className="grid gap-px overflow-hidden rounded-card border border-steel/40 bg-steel/30 sm:grid-cols-2 lg:col-span-3">
             {whyUs.map((w) => (
               <li key={w.title} className="bg-white p-4 md:p-6">
-                <BadgeCheck aria-hidden className="h-6 w-6 text-amber" />
+                <BadgeCheck aria-hidden className="h-6 w-6 text-navy" />
                 <h3 className="mt-2 text-base md:text-lg">{w.title}</h3>
                 <p className="mt-1 text-sm text-slate">{w.text}</p>
               </li>

@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import CTABand from './CTABand'
+import WhatsAppFab from './WhatsAppFab'
 
 export default function Layout() {
   const { pathname } = useLocation()
@@ -33,6 +34,7 @@ export default function Layout() {
       </main>
       <CTABand />
       <Footer />
+      <WhatsAppFab />
     </div>
   )
 }

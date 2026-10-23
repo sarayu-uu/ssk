@@ -44,7 +44,7 @@ export default function ClientsPanel() {
             </span>
             <div className="min-w-0">
               <p className="font-heading text-sm font-bold leading-snug text-navy">{c.name}</p>
-              <p className="mt-0.5 font-mono text-[11px] text-slate">{c.detail}</p>
+              <p className="mt-0.5 text-[11px] tabular-nums text-slate">{c.detail}</p>
             </div>
           </li>
         ))}

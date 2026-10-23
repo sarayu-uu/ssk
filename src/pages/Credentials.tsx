@@ -34,7 +34,7 @@ export default function Credentials() {
         <div className="mx-auto max-w-6xl px-4">
           <h2 id="licences-heading" className="text-2xl md:text-4xl">Licences</h2>
           <p className="mt-2 text-sm text-slate">
-            Two states · Vendor No. <span className="font-mono text-ink">{company.vendorNo}</span>
+            Two states · Vendor No. <span className="tabular-nums text-ink">{company.vendorNo}</span>
           </p>
 
           <div className="mt-6 md:mt-8">

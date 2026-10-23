@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { ChevronRight, Loader2, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
 import PageHero from '../components/PageHero'
+import Button from '../components/Button'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { company, services } from '../data/company'
 
@@ -9,7 +10,7 @@ type Status = 'idle' | 'sending' | 'success' | 'error'
 type Errors = Partial<Record<'name' | 'phone' | 'message', string>>
 
 const inputCls =
-  'mt-1 block min-h-12 w-full rounded-btn border border-steel bg-white px-3 py-2 text-ink placeholder:text-slate/70 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-navy'
+  'mt-1 block min-h-12 w-full rounded-btn border border-slate bg-white px-3 py-2 text-ink placeholder:text-slate/70'
 
 const mapSrc = 'https://www.google.com/maps?q=Western+Hills,+Jal+Vayu+Vihar,+KPHB+Colony,+Kukatpally,+Hyderabad,+Telangana+500085&output=embed'
 
@@ -78,7 +79,8 @@ export default function Contact() {
       />
 
       <section className="bg-white py-14 md:py-20">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-2 lg:gap-14">
+        {/* Mobile order: call/WhatsApp → form → address & map. lg: form spans the right column */}
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-x-14 lg:gap-y-6">
           {/* Direct contact */}
           <div>
             <h2 className="text-2xl md:text-4xl">Call or message</h2>
@@ -138,44 +140,19 @@ export default function Contact() {
                 </a>
               </li>
             </ul>
-
-            <address className="mt-5 flex gap-2.5 rounded-card bg-surface p-3 not-italic text-ink">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-navy text-white">
-                <MapPin className="h-4 w-4" aria-hidden="true" />
-              </span>
-              <span className="min-w-0 text-xs">
-                <strong className="block text-sm text-navy">{company.name}</strong>
-                {company.address.full}
-              </span>
-            </address>
-
-            <div className="mt-6 overflow-hidden rounded-card border border-steel/40 shadow-sm">
-              <iframe
-                title="Map of SSK Electricals, Kukatpally, Hyderabad"
-                src={mapSrc}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-                className="block aspect-[4/3] w-full border-0"
-              />
-            </div>
           </div>
 
           {/* Form */}
-          <div>
+          <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
             <h2 className="text-2xl md:text-4xl">Send an enquiry</h2>
 
             {status === 'success' ? (
               <div role="status" className="mt-6 rounded-card border border-green-700/30 bg-green-50 p-5 text-green-900">
                 <p className="font-bold">Thank you. Your enquiry has been sent.</p>
                 <p className="mt-1">We will call you back shortly. For urgent work, call {company.phones[0].display}.</p>
-                <button
-                  type="button"
-                  onClick={() => setStatus('idle')}
-                  className="mt-4 min-h-11 rounded-btn border-2 border-navy px-4 font-semibold text-navy hover:bg-navy hover:text-white"
-                >
+                <Button variant="secondary" size="sm" onClick={() => setStatus('idle')} className="mt-4">
                   Send another enquiry
-                </button>
+                </Button>
               </div>
             ) : (
               <form onSubmit={onSubmit} noValidate className="mt-6 space-y-4">
@@ -203,9 +180,10 @@ export default function Contact() {
                     autoComplete="tel"
                     required
                     aria-invalid={!!errors.phone}
-                    aria-describedby={errors.phone ? 'phone-error' : undefined}
+                    aria-describedby={errors.phone ? 'phone-hint phone-error' : 'phone-hint'}
                     className={inputCls}
                   />
+                  <p id="phone-hint" className="mt-1 text-xs text-slate">10-digit mobile number, e.g. 98765 43210</p>
                   {err('phone')}
                 </div>
                 <div>
@@ -242,16 +220,36 @@ export default function Contact() {
                   </p>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-btn bg-amber px-6 font-semibold text-navy hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy disabled:opacity-70 sm:w-auto"
-                >
+                <Button type="submit" disabled={status === 'sending'} className="w-full sm:w-auto">
                   {status === 'sending' && <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />}
                   {status === 'sending' ? 'Sending…' : 'Send enquiry'}
-                </button>
+                </Button>
               </form>
             )}
+          </div>
+
+          {/* Address & map */}
+          <div className="lg:col-start-1">
+            <address className="flex gap-2.5 rounded-card bg-surface p-3 not-italic text-ink">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-navy text-white">
+                <MapPin className="h-4 w-4" aria-hidden="true" />
+              </span>
+              <span className="min-w-0 text-xs">
+                <strong className="block text-sm text-navy">{company.name}</strong>
+                {company.address.full}
+              </span>
+            </address>
+
+            <div className="mt-6 overflow-hidden rounded-card border border-steel/40 shadow-sm">
+              <iframe
+                title="Map of SSK Electricals, Kukatpally, Hyderabad"
+                src={mapSrc}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                className="block aspect-[4/3] w-full border-0"
+              />
+            </div>
           </div>
         </div>
       </section>

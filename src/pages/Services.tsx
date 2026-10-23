@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { Check } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import Picture from '../components/Picture'
@@ -25,6 +26,34 @@ export default function Services() {
     'Substations, HT & LT works, XLPE cabling, transmission lines, transformers, solar and EV charging HT services in Telangana and Andhra Pradesh.',
   )
 
+  const [active, setActive] = useState<string>()
+  const barRef = useRef<HTMLUListElement>(null)
+
+  // Active = the service section crossing the band just below the sticky header + jump bar
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        const hit = entries.find((e) => e.isIntersecting)
+        if (hit) setActive(hit.target.id)
+      },
+      { rootMargin: '-140px 0px -55% 0px' },
+    )
+    services.forEach((s) => {
+      const el = document.getElementById(s.slug)
+      if (el) io.observe(el)
+    })
+    return () => io.disconnect()
+  }, [])
+
+  // Keep the active chip visible in the horizontally scrolling bar
+  useEffect(() => {
+    const bar = barRef.current
+    const chip = bar?.querySelector<HTMLElement>(`[data-slug="${active}"]`)
+    if (!bar || !chip) return
+    bar.scrollTo({ left: chip.offsetLeft - 16, behavior: 'smooth' })
+  }, [active])
+
   return (
     <>
       <PageHero
@@ -33,20 +62,32 @@ export default function Services() {
         intro="From 11 kV substations to XLPE cabling, transformers and solar plants."
       />
 
-      {/* Sticky jump bar under the header — swipe on mobile */}
+      {/* Sticky jump bar under the header — swipe on mobile; highlights the section in view */}
       <nav aria-label="Jump to service" className="sticky top-16 z-30 border-b border-steel/40 bg-white/95 backdrop-blur">
-        <ul className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {services.map((s, i) => (
-            <li key={s.slug} className="shrink-0">
-              <a
-                href={`#${s.slug}`}
-                className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-steel/60 px-3 text-xs font-semibold text-navy hover:border-navy hover:bg-surface"
-              >
-                <span className="font-mono text-[11px] text-amber">{num(i)}</span>
-                {s.title}
-              </a>
-            </li>
-          ))}
+        <ul
+          ref={barRef}
+          className="relative mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {services.map((s, i) => {
+            const isActive = s.slug === active
+            return (
+              <li key={s.slug} className="shrink-0">
+                <a
+                  href={`#${s.slug}`}
+                  data-slug={s.slug}
+                  aria-current={isActive ? 'location' : undefined}
+                  className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border px-3 text-xs font-semibold transition-colors ${
+                    isActive
+                      ? 'border-navy bg-navy text-white'
+                      : 'border-steel/60 text-navy hover:border-navy hover:bg-surface'
+                  }`}
+                >
+                  <span className={`text-[11px] tabular-nums ${isActive ? 'text-amber' : 'text-slate'}`}>{num(i)}</span>
+                  {s.title}
+                </a>
+              </li>
+            )
+          })}
         </ul>
       </nav>
 
@@ -83,7 +124,9 @@ export default function Services() {
                 <ul className="mt-5 divide-y divide-steel/30 overflow-hidden rounded-card border border-steel/40 bg-white">
                   {s.points.map((p) => (
                     <li key={p} className="flex gap-3 px-4 py-3 text-sm">
-                      <Check aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-amber" />
+                      <span aria-hidden className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-amber">
+                        <Check className="h-3 w-3 text-navy" strokeWidth={3} />
+                      </span>
                       <span>{p}</span>
                     </li>
                   ))}

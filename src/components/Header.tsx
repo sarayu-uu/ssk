@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, Phone, Home, Building2, Wrench, Images, ShieldCheck, Mail } from 'lucide-react'
 import { company } from '../data/company'
 import MobileNav, { type NavItem } from './MobileNav'
+import Button from './Button'
 
 const links: NavItem[] = [
   { to: '/', label: 'Home', icon: Home },
@@ -57,22 +58,20 @@ export default function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-1">
-          <a
-            href={`tel:${company.phones[0].tel}`}
-            className="hidden min-h-11 items-center gap-2 rounded-btn bg-amber px-4 text-sm font-semibold text-navy hover:brightness-95 lg:inline-flex"
-          >
+          <Button size="sm" href={`tel:${company.phones[0].tel}`} className="max-lg:hidden">
             <Phone className="h-4 w-4" aria-hidden="true" />
             {company.phones[0].display}
-          </a>
+          </Button>
           {/* Always-visible Call on mobile */}
-          <a
+          <Button
+            size="sm"
             href={`tel:${company.phones[0].tel}`}
-            aria-label={`Call ${company.phones[0].display}`}
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-btn bg-amber px-3 text-xs font-bold text-navy hover:brightness-95 lg:hidden"
+            ariaLabel={`Call ${company.phones[0].display}`}
+            className="gap-1.5! px-3! text-xs! font-bold! lg:hidden"
           >
             <Phone className="h-4 w-4" aria-hidden="true" />
             Call
-          </a>
+          </Button>
           <button
             type="button"
             onClick={() => setOpen(true)}

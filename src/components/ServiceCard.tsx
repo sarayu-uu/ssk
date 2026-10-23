@@ -21,7 +21,9 @@ export default function ServiceCard({ service, image, showPoints = false }: Serv
           <ul className="mt-4 space-y-2 text-sm">
             {service.points.map((p) => (
               <li key={p} className="flex gap-2">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden="true" />
+                <span aria-hidden="true" className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-amber">
+                  <Check className="h-3 w-3 text-navy" strokeWidth={3} />
+                </span>
                 <span>{p}</span>
               </li>
             ))}

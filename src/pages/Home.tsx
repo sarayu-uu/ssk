@@ -43,12 +43,7 @@ function Hero() {
             <Phone aria-hidden className="h-5 w-5" />
             Call {company.phones[0].display}
           </Button>
-          <Button
-            variant="secondary"
-            href={company.whatsapp}
-            external
-            className="w-full border-white! text-white! hover:bg-white! hover:text-navy! sm:w-auto"
-          >
+          <Button variant="light" href={company.whatsapp} external className="w-full sm:w-auto">
             <MessageCircle aria-hidden className="h-5 w-5" />
             WhatsApp us
           </Button>
@@ -67,7 +62,7 @@ const homeLicences: RegisterItem[] = [
 
 function Licences() {
   return (
-    <section aria-labelledby="licences-heading" className="bg-surface py-10 md:py-14">
+    <section aria-labelledby="licences-heading" className="bg-white py-10 md:py-14">
       <div className="mx-auto max-w-6xl px-4">
         <LicenceRegister
           items={homeLicences}

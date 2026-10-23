@@ -143,7 +143,7 @@ export default function MobileNav({ id, open, onClose, links }: MobileNavProps) 
               WhatsApp
             </a>
           </div>
-          <p className="mt-2 text-center font-mono text-[11px] text-white/60">{company.phones[0].display}</p>
+          <p className="mt-2 text-center text-[11px] tabular-nums text-white/60">{company.phones[0].display}</p>
         </div>
       </div>
     </div>

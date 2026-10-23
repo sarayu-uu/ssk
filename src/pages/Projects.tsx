@@ -68,7 +68,7 @@ export default function Projects() {
                   }`}
                 >
                   {f}{' '}
-                  <span className={`ml-1 rounded-full px-1.5 py-0.5 font-mono text-[11px] ${active ? 'bg-amber text-navy' : 'bg-surface text-slate'}`}>
+                  <span className={`ml-1 rounded-full px-1.5 py-0.5 tabular-nums text-[11px] ${active ? 'bg-amber text-navy' : 'bg-surface text-slate'}`}>
                     {countFor(f)}
                   </span>
                 </button>
@@ -78,8 +78,13 @@ export default function Projects() {
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 -right-4 w-10 bg-gradient-to-l from-white to-transparent md:hidden" />
           </div>
 
+          <p aria-live="polite" className="mt-3 text-xs text-slate">
+            Showing {visible.length} {visible.length === 1 ? 'photo' : 'photos'}
+            {filter !== 'All' && ` in ${filter}`}
+          </p>
+
           {/* Mosaic: every 7th photo is a large feature tile; dense flow fills the gaps */}
-          <ul className="mt-6 grid grid-flow-dense grid-cols-2 gap-3 md:grid-cols-3 md:auto-rows-[180px] md:gap-4 lg:grid-cols-4 lg:auto-rows-[200px]">
+          <ul className="mt-4 grid grid-flow-dense grid-cols-2 gap-3 md:grid-cols-3 md:auto-rows-[180px] md:gap-4 lg:grid-cols-4 lg:auto-rows-[200px]">
             {visible.map((img, i) => {
               const feature = i % 7 === 0
               return (
