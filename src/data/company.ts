@@ -19,6 +19,8 @@ export interface Client {
 
 export interface Stat {
   value: string
+  /** Shown smaller, in amber, after the value (e.g. km, MVA) */
+  unit?: string
   label: string
 }
 
@@ -47,10 +49,10 @@ export const company = {
 } as const
 
 export const stats: Stat[] = [
-  { value: '2009', label: 'Established' },
-  { value: '10,000+ km', label: 'Transmission lines laid' },
-  { value: '2,000+ km', label: 'XLPE UG cable (400 & 300 sq.mm)' },
-  { value: '1 MVA', label: 'Transformer installs; 2500 kVA OLTC servicing' },
+  { value: '2009', label: 'Established, Hyderabad' },
+  { value: '10,000+', unit: 'km', label: 'Transmission lines laid' },
+  { value: '2,000+', unit: 'km', label: 'XLPE UG cable (400 & 300 sq.mm)' },
+  { value: '1', unit: 'MVA', label: 'Transformer installs; 2500 kVA OLTC servicing' },
 ]
 
 export const licences: Licence[] = [

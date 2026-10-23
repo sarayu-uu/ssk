@@ -6,6 +6,13 @@ import { usePageMeta } from '../hooks/usePageMeta'
 import { company, licences } from '../data/company'
 import { documentImages } from '../data/images'
 import Lightbox from '../components/Lightbox'
+import LicenceRegister, { type RegisterItem } from '../components/LicenceRegister'
+
+// 'TGSPDCL, Telangana' -> name 'TGSPDCL', sub 'Telangana · All voltages exceeding 33 kV'
+const registerItems: RegisterItem[] = licences.map((l) => {
+  const [name, region] = l.authority.split(', ')
+  return { name, sub: [region, l.scope].filter(Boolean).join(' · '), number: l.number, grade: l.class }
+})
 
 export default function Credentials() {
   const [openIndex, setOpenIndex] = useState(-1)
@@ -23,60 +30,27 @@ export default function Credentials() {
         intro={`${company.grade}, certified by ${company.certifiedBy.join(' and ')}.`}
       />
 
-      <section className="bg-white py-14 md:py-20">
+      <section aria-labelledby="licences-heading" className="bg-white py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-2xl md:text-4xl">Licences</h2>
-          <p className="mt-2 text-slate">Vendor No. {company.vendorNo}</p>
+          <h2 id="licences-heading" className="text-2xl md:text-4xl">Licences</h2>
+          <p className="mt-2 text-sm text-slate">
+            Two states · Vendor No. <span className="font-mono text-ink">{company.vendorNo}</span>
+          </p>
 
-          {/* Mobile: cards */}
-          <ul className="mt-6 space-y-3 md:hidden">
-            {licences.map((l) => (
-              <li
-                key={`${l.authority}-${l.number}`}
-                className="overflow-hidden rounded-card border border-steel/40 border-l-4 border-l-amber bg-white px-3.5 py-3 shadow-sm"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-sm font-bold leading-snug text-navy">{l.authority}</h3>
-                  <span className="shrink-0 rounded-full bg-navy px-2.5 py-0.5 text-xs font-bold text-white">
-                    {l.number}
-                  </span>
-                </div>
-                <p className="mt-1.5 text-xs text-slate">
-                  <span className="font-semibold text-ink">{l.class}</span>
-                  <span aria-hidden="true"> · </span>
-                  {l.scope}
-                </p>
-              </li>
-            ))}
-          </ul>
-
-          {/* Desktop: table */}
-          <div className="mt-8 hidden overflow-hidden rounded-card border border-steel/40 shadow-sm md:block">
-            <table className="w-full text-left">
-              <caption className="sr-only">Electrical contractor licences held by SSK Electricals</caption>
-              <thead className="bg-navy text-white">
-                <tr>
-                  <th scope="col" className="px-5 py-3 font-semibold">Authority</th>
-                  <th scope="col" className="px-5 py-3 font-semibold">Class</th>
-                  <th scope="col" className="px-5 py-3 font-semibold">Licence No.</th>
-                  <th scope="col" className="px-5 py-3 font-semibold">Scope</th>
-                </tr>
-              </thead>
-              <tbody>
-                {licences.map((l, i) => (
-                  <tr key={`${l.authority}-${l.number}`} className={i % 2 ? 'bg-surface' : 'bg-white'}>
-                    <th scope="row" className="px-5 py-4 font-semibold text-navy">{l.authority}</th>
-                    <td className="px-5 py-4">{l.class}</td>
-                    <td className="px-5 py-4 font-medium">{l.number}</td>
-                    <td className="px-5 py-4 text-slate">{l.scope}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-6 md:mt-8">
+            <LicenceRegister
+              items={registerItems}
+              title="Licensed above 33 kV"
+              titleId="register-heading"
+              titleAs="h3"
+              columns="md:grid-cols-3"
+              action={<span className="text-[11px] font-semibold text-steel md:text-xs">{licences.length} licences</span>}
+            />
           </div>
         </div>
       </section>
 
+      {documentImages.length > 0 && (
       <section className="bg-surface py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-2xl md:text-4xl">Licence &amp; work order documents</h2>
@@ -101,6 +75,7 @@ export default function Credentials() {
           </ul>
         </div>
       </section>
+      )}
 
       <Lightbox images={documentImages} index={openIndex} onClose={() => setOpenIndex(-1)} />
     </>

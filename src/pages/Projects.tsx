@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { categories, galleryImages, type Category, type SiteImage } from '../data/images'
 import Lightbox from '../components/Lightbox'
 import PageHero from '../components/PageHero'
-import Picture from '../components/Picture'
+import PhotoTile from '../components/PhotoTile'
 import { usePageMeta } from '../hooks/usePageMeta'
 
 type Filter = 'All' | Category
@@ -61,13 +61,16 @@ export default function Projects() {
                   type="button"
                   aria-pressed={active}
                   onClick={() => setFilter(f)}
-                  className={`min-h-11 shrink-0 rounded-lg border px-4 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy ${
+                  className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy ${
                     active
-                      ? 'border-navy bg-navy text-white'
+                      ? 'border-navy bg-navy text-white shadow-sm'
                       : 'border-steel bg-white text-navy hover:bg-surface'
                   }`}
                 >
-                  {f} <span className={active ? 'text-white/80' : 'text-slate'}>({countFor(f)})</span>
+                  {f}{' '}
+                  <span className={`ml-1 rounded-full px-1.5 py-0.5 font-mono text-[11px] ${active ? 'bg-amber text-navy' : 'bg-surface text-slate'}`}>
+                    {countFor(f)}
+                  </span>
                 </button>
               )
             })}
@@ -75,26 +78,21 @@ export default function Projects() {
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 -right-4 w-10 bg-gradient-to-l from-white to-transparent md:hidden" />
           </div>
 
-          <ul className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
-            {visible.map((img, i) => (
-              <li
-                key={img.id}
-                className="overflow-hidden rounded-card bg-surface shadow-sm transition-shadow hover:shadow-md"
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenIndex(i)}
-                  aria-label={`View larger: ${img.alt}`}
-                  className="block w-full text-left focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-navy"
+          {/* Mosaic: every 7th photo is a large feature tile; dense flow fills the gaps */}
+          <ul className="mt-6 grid grid-flow-dense grid-cols-2 gap-3 md:grid-cols-3 md:auto-rows-[180px] md:gap-4 lg:grid-cols-4 lg:auto-rows-[200px]">
+            {visible.map((img, i) => {
+              const feature = i % 7 === 0
+              return (
+                <li
+                  key={img.id}
+                  className={`overflow-hidden rounded-card bg-navy shadow-sm transition-shadow hover:shadow-md ${
+                    feature ? 'col-span-2 aspect-[16/10] md:row-span-2 md:aspect-auto' : 'aspect-square md:aspect-auto'
+                  }`}
                 >
-                  <Picture
-                    image={img}
-                    className={`aspect-[4/3] w-full object-cover ${img.hasCaption ? 'object-top' : 'object-center'}`}
-                  />
-                  <span className="block p-2.5 text-xs leading-snug text-slate sm:text-sm">{img.alt}</span>
-                </button>
-              </li>
-            ))}
+                  <PhotoTile image={img} onClick={() => setOpenIndex(i)} large={feature} />
+                </li>
+              )
+            })}
           </ul>
         </div>
       </section>

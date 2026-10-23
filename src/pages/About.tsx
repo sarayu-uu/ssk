@@ -1,10 +1,12 @@
-import { ShieldCheck, Award, Clock, BadgeCheck, MapPin, Building2, Landmark } from 'lucide-react'
+import type { ReactNode } from 'react'
+import { ShieldCheck, Award, Clock, BadgeCheck, MapPin, Quote } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import Picture from '../components/Picture'
 import { usePageMeta } from '../hooks/usePageMeta'
 import Section from '../components/Section'
-import StatCard from '../components/StatCard'
-import { company, stats, privateClients, governmentWork } from '../data/company'
+import StatBand from '../components/StatBand'
+import ClientsPanel from '../components/ClientsPanel'
+import { company, stats } from '../data/company'
 import { getImage, type SiteImage } from '../data/images'
 
 const values = [
@@ -44,10 +46,15 @@ const whyUs = [
   },
 ]
 
-function Photo({ image, className = '' }: { image?: SiteImage; className?: string }) {
+/** Photo with an offset amber frame behind it (md+). */
+function FramedPhoto({ image, className = '', children }: { image?: SiteImage; className?: string; children?: ReactNode }) {
   if (!image) return null
   return (
-    <Picture image={image} className={`aspect-[4/3] w-full rounded-card object-cover shadow-sm ${className}`} />
+    <div className={`relative isolate ${className}`}>
+      <div aria-hidden className="absolute inset-0 -z-10 hidden translate-x-3 translate-y-3 rounded-card border-2 border-amber md:block" />
+      <Picture image={image} className="aspect-[4/3] w-full rounded-card object-cover shadow-md" />
+      {children}
+    </div>
   )
 }
 
@@ -68,6 +75,7 @@ export default function About() {
         title={`Building power infrastructure since ${company.established}`}
         intro={`${company.name} is a licensed electrical contractor based in Kukatpally, Hyderabad.`}
       />
+      <StatBand stats={stats} />
 
       <Section eyebrow="Our story" title="From a small crew to a Class‑I contractor">
         <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
@@ -86,91 +94,88 @@ export default function About() {
               build substations, install and service transformers, and deliver on-grid solar and EV charging
               connections.
             </p>
-            <p className="flex items-start gap-2 text-slate">
-              <MapPin aria-hidden className="mt-1 h-5 w-5 shrink-0 text-amber" />
+            <p className="flex items-start gap-2 text-sm text-slate">
+              <MapPin aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-amber" />
               {company.address.full}
             </p>
           </div>
-          <Photo image={storyPhoto} />
+          <FramedPhoto image={storyPhoto}>
+            <div className="on-navy absolute bottom-3 left-3 rounded-lg bg-navy px-3 py-2 text-white shadow-md md:-bottom-5 md:-left-5 md:px-5 md:py-3">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-amber md:text-xs">Established</p>
+              <p className="font-heading text-xl font-extrabold leading-none md:text-3xl">{company.established}</p>
+            </div>
+          </FramedPhoto>
         </div>
       </Section>
 
-      <Section tone="surface">
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-6">
-          {stats.map((s) => (
-            <StatCard key={s.label} {...s} />
-          ))}
-        </div>
-      </Section>
-
-      <Section eyebrow="Proprietor" title={company.proprietor.name}>
+      <Section tone="surface" eyebrow="Proprietor" title="Owner-led, on every site">
         <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-          <Photo image={cablePhoto} className="md:order-2" />
-          <div className="space-y-4 text-ink">
-            <p>
-              {company.proprietor.name} founded the firm and still leads it as {company.proprietor.role}.
-              Every tender, site plan and handover passes through the owner.
-            </p>
-            <p>
-              Clients deal with the person accountable for the work, not a layer of intermediaries. That is
-              how we keep quality high and commitments honest.
-            </p>
-          </div>
+          <FramedPhoto image={cablePhoto} className="md:order-2" />
+          <figure className="on-navy rounded-card bg-navy p-6 text-white shadow-sm md:p-8">
+            <Quote aria-hidden className="h-8 w-8 text-amber" />
+            <blockquote className="mt-3 space-y-3 text-sm text-white/90 md:text-base">
+              <p className="font-heading text-lg font-bold leading-snug text-white md:text-2xl">
+                Clients deal with the person accountable for the work, not a layer of intermediaries.
+              </p>
+              <p>
+                Every tender, site plan and handover passes through the owner. That is how we keep quality high
+                and commitments honest.
+              </p>
+            </blockquote>
+            <figcaption className="mt-5 border-t border-white/15 pt-4">
+              <p className="font-heading font-bold">{company.proprietor.name}</p>
+              <p className="text-xs text-steel">
+                Founder &amp; {company.proprietor.role}, since {company.established}
+              </p>
+            </figcaption>
+          </figure>
         </div>
       </Section>
 
-      <Section tone="surface" eyebrow="Our values" title="How we work">
-        <ul className="grid gap-4 md:grid-cols-3 md:gap-6">
-          {values.map(({ icon: Icon, title, text }) => (
-            <li key={title} className="rounded-card border border-steel/40 bg-white p-5 shadow-sm">
-              <Icon aria-hidden className="h-8 w-8 text-amber" />
+      <Section eyebrow="Our values" title="How we work">
+        {/* Numbered columns with an amber rule — no boxes */}
+        <ol className="grid gap-8 md:grid-cols-3 md:gap-10">
+          {values.map(({ icon: Icon, title, text }, i) => (
+            <li key={title} className="border-t-2 border-amber pt-4">
+              <div className="flex items-center justify-between">
+                <span className="font-heading text-3xl font-extrabold text-steel/70 md:text-4xl">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <Icon aria-hidden className="h-6 w-6 text-navy" />
+              </div>
               <h3 className="mt-3 text-lg">{title}</h3>
-              <p className="mt-2 text-slate">{text}</p>
+              <p className="mt-1 text-sm text-slate md:text-base">{text}</p>
             </li>
           ))}
-        </ul>
+        </ol>
       </Section>
 
-      <Section eyebrow="Why choose us" title="Four reasons clients stay with us">
-        <div className="grid items-start gap-8 lg:grid-cols-5 lg:gap-12">
-          <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-3">
+      <Section tone="surface" eyebrow="Why choose us" title="Four reasons clients stay with us">
+        <div className="grid items-stretch gap-8 lg:grid-cols-5 lg:gap-12">
+          <ul className="grid gap-px overflow-hidden rounded-card border border-steel/40 bg-steel/30 sm:grid-cols-2 lg:col-span-3">
             {whyUs.map((w) => (
-              <li key={w.title} className="rounded-card border border-steel/40 bg-white p-5 shadow-sm">
+              <li key={w.title} className="bg-white p-4 md:p-6">
                 <BadgeCheck aria-hidden className="h-6 w-6 text-amber" />
-                <h3 className="mt-2 text-lg">{w.title}</h3>
-                <p className="mt-1 text-slate">{w.text}</p>
+                <h3 className="mt-2 text-base md:text-lg">{w.title}</h3>
+                <p className="mt-1 text-sm text-slate">{w.text}</p>
               </li>
             ))}
           </ul>
-          <Photo image={sitePhoto} className="lg:col-span-2" />
+          {sitePhoto && (
+            <Picture
+              image={sitePhoto}
+              className="aspect-[4/3] w-full rounded-card object-cover shadow-sm lg:col-span-2 lg:aspect-auto lg:h-full"
+            />
+          )}
         </div>
       </Section>
 
       <Section
-        tone="surface"
         eyebrow="Experience"
         title="Government and private clients"
         intro="We deliver for power utilities and for industry."
       >
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-card border border-steel/40 bg-white p-5 shadow-sm">
-            <Landmark aria-hidden className="h-8 w-8 text-amber" />
-            <h3 className="mt-3 text-lg">Government</h3>
-            <p className="mt-2 text-slate">{governmentWork.summary}</p>
-            <p className="mt-2 text-slate">{governmentWork.workOrders}</p>
-          </div>
-          <div className="rounded-card border border-steel/40 bg-white p-5 shadow-sm">
-            <Building2 aria-hidden className="h-8 w-8 text-amber" />
-            <h3 className="mt-3 text-lg">Private sector</h3>
-            <ul className="mt-2 space-y-1 text-slate">
-              {privateClients.map((c) => (
-                <li key={c.name}>
-                  <span className="font-medium text-ink">{c.name}</span> — {c.detail}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <ClientsPanel />
       </Section>
     </>
   )
