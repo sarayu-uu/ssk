@@ -1,10 +1,10 @@
-import { Phone, MessageCircle, BadgeCheck } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Phone, MessageCircle, ShieldCheck, ArrowRight } from 'lucide-react'
 import Button from '../components/Button'
 import Section from '../components/Section'
-import StatCard from '../components/StatCard'
 import ServiceCard from '../components/ServiceCard'
 import ImageGrid from '../components/ImageGrid'
-import { company, services, privateClients, governmentWork, type Stat } from '../data/company'
+import { company, services, privateClients, governmentWork } from '../data/company'
 import { getImage, type SiteImage } from '../data/images'
 import Picture from '../components/Picture'
 import { usePageMeta } from '../hooks/usePageMeta'
@@ -55,55 +55,83 @@ function Hero() {
   )
 }
 
-const trustBadges = [
-  { name: 'TGSPDCL', detail: 'Class‑I · A 8770' },
-  { name: 'APEPDCL', detail: 'Class‑I A Grade · 01521' },
-  { name: 'TS Transco', detail: 'Class‑I · A8770' },
-  { name: 'AP Transco', detail: 'Class‑I A Grade · 01521' },
+const homeStats = [
+  { value: String(company.established), unit: '', label: 'Established, Hyderabad' },
+  { value: '10,000+', unit: 'km', label: 'Transmission lines laid' },
+  { value: '2,000+', unit: 'km', label: 'XLPE UG cable laid' },
+  { value: '1', unit: 'MVA', label: 'Transformer installs, up to' },
 ]
 
-function TrustStrip() {
+// Navy band continuing the hero — hairline dividers instead of cards
+function StatsBand() {
   return (
-    <section aria-label="Licences" className="border-b border-steel/40 bg-surface py-6 md:py-8">
+    <section aria-label="Track record" className="on-navy border-t border-white/10 bg-navy">
       <div className="mx-auto max-w-6xl px-4">
-        <p className="mb-4 text-center text-sm font-semibold uppercase tracking-wide text-slate">
-          Licensed to work above 33 kV
-        </p>
-        <ul className="grid grid-cols-2 gap-3 md:grid-cols-4">
-          {trustBadges.map((b) => (
-            <li
-              key={b.name}
-              className="flex min-w-0 flex-col items-start gap-2 rounded-card border border-steel/40 bg-white p-3 shadow-sm sm:flex-row sm:items-center sm:gap-3"
-            >
-              <BadgeCheck aria-hidden className="h-6 w-6 shrink-0 text-amber" />
-              <div className="min-w-0">
-                <p className="font-heading text-sm font-bold text-navy sm:text-base">{b.name}</p>
-                <p className="text-xs text-slate">{b.detail}</p>
-              </div>
-            </li>
+        <dl className="grid grid-cols-2 gap-px bg-white/10 md:grid-cols-4">
+          {homeStats.map((s) => (
+            <div key={s.label} className="bg-navy px-3 py-5 md:px-6 md:py-8">
+              <dt className="sr-only">{s.label}</dt>
+              <dd className="font-heading text-2xl font-extrabold leading-none text-white min-[400px]:text-3xl md:text-4xl">
+                {s.value}
+                {s.unit && <span className="ml-1 text-base font-bold text-amber md:text-xl">{s.unit}</span>}
+              </dd>
+              <dd aria-hidden className="mt-2 text-xs text-steel md:text-sm">
+                {s.label}
+              </dd>
+            </div>
           ))}
-        </ul>
+        </dl>
       </div>
     </section>
   )
 }
 
-const homeStats: Stat[] = [
-  { value: `Since ${company.established}`, label: 'Serving Telangana & AP' },
-  { value: '10,000+ km', label: 'Transmission lines laid' },
-  { value: '2,000+ km', label: 'XLPE UG cable laid' },
-  { value: 'Class‑I', label: 'Licences in two states' },
+const licences = [
+  { authority: 'TGSPDCL', region: 'Telangana', grade: 'Class‑I', no: 'A 8770' },
+  { authority: 'APEPDCL', region: 'Andhra Pradesh', grade: 'Class‑I A Grade', no: '01521' },
+  { authority: 'TS Transco', region: 'Telangana', grade: 'Class‑I', no: 'A8770' },
+  { authority: 'AP Transco', region: 'Andhra Pradesh', grade: 'Class‑I A Grade', no: '01521' },
 ]
 
-function StatsRow() {
+// Reads like an official register: authority on the left, licence number on the right
+function LicenceRegister() {
   return (
-    <Section>
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-6">
-        {homeStats.map((s) => (
-          <StatCard key={s.label} {...s} />
-        ))}
+    <section aria-labelledby="licences-heading" className="bg-surface py-10 md:py-14">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="overflow-hidden rounded-card border border-steel/50 bg-white shadow-sm">
+          <div className="flex items-center justify-between gap-3 border-b border-steel/40 bg-navy px-4 py-3 md:px-6">
+            <h2 id="licences-heading" className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white md:text-sm">
+              <ShieldCheck aria-hidden className="h-4 w-4 shrink-0 text-amber md:h-5 md:w-5" />
+              Licensed above 33 kV
+            </h2>
+            <Link
+              to="/credentials"
+              className="inline-flex min-h-11 shrink-0 items-center gap-1 text-[11px] font-semibold text-amber hover:underline md:text-sm"
+            >
+              All licences
+              <ArrowRight aria-hidden className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+          <ul className="divide-y divide-steel/30 md:grid md:grid-cols-4 md:divide-x md:divide-y-0">
+            {licences.map((l) => (
+              <li key={l.authority} className="flex items-center justify-between gap-3 px-4 py-3 md:block md:px-6 md:py-5">
+                <div className="min-w-0">
+                  <p className="font-heading text-sm font-bold text-navy md:text-base">{l.authority}</p>
+                  <p className="text-[11px] text-slate md:text-xs">{l.region}</p>
+                </div>
+                <div className="text-right md:mt-3 md:text-left">
+                  <p className="font-mono text-sm font-semibold tracking-tight text-ink">
+                    <span className="sr-only">Licence no. </span>
+                    {l.no}
+                  </p>
+                  <p className="text-[11px] text-slate md:text-xs">{l.grade}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </Section>
+    </section>
   )
 }
 
@@ -214,8 +242,8 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }} />
       <Hero />
-      <TrustStrip />
-      <StatsRow />
+      <StatsBand />
+      <LicenceRegister />
       <ServicesPreview />
       <FeaturedProjects />
       <Clients />
